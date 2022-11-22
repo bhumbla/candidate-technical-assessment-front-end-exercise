@@ -1,0 +1,5 @@
+[
+  {"id": 1, "date": "26-11-2021", "type": "self-harm", "status": "Escalated"},
+  {"id": 2, "date": "26-11-2021", "type": "bullying", "status": "Resolved"},
+  {"id": 3, "date": "26-11-2021", "type": "violence", "status": "Pending Review"}
+]
