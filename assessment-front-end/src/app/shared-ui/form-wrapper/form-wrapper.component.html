@@ -1,5 +1,5 @@
 <div id="login-form-wrapper">
-  <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit($event)" >
+  <form [formGroup]="form" (ngSubmit)="onSubmit($event)" >
     <div *ngFor="let form_elem of fields">
       <div [ngSwitch]="form_elem.type">
         <app-gaggle-input *ngSwitchCase="'gaggle-input'">

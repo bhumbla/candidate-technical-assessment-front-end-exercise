@@ -50,7 +50,9 @@ export class FormWrapperComponent implements OnInit {
 
   onSubmit($event: Event) {
     $event.stopPropagation();
-    this.submit.emit(this.form.value);
+    if(this.form.valid) {
+      this.submit.emit(this.form.value);
+    }
   }
 
 }
