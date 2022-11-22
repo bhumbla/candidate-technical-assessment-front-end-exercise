@@ -1,0 +1,5 @@
+<button id="hide-show-btn"  type="button" (click)="toggleBtn()"
+  [attr.aria-label]="btnAriaLabel()" [attr.aria-pressed]="toggle">
+  <mat-icon [svgIcon]="toggle ? onIcon : offIcon"></mat-icon>
+  <span>{{toggle ? 'Hide' : 'Show'}}</span>
+</button>

@@ -1,0 +1,22 @@
+
+#hide-show-btn {
+  display: inline-flex;
+  justify-content: center;
+  border: none;
+  align-items: center;
+  background: white;
+  font-size: 0.7rem;
+  height: 0.7rem;
+}
+#hide-show-btn:hover {
+  cursor: pointer;
+}
+
+#hide-show-btn .mat-icon {
+  height: 0.7rem;
+  width: 0.7rem;
+}
+
+#hide-show-btn span {
+  margin-left: 0.2rem;
+}
