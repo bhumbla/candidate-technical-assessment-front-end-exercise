@@ -1,0 +1,70 @@
+
+#login-form-wrapper {
+  flex-grow: 1;
+  display: flex;
+  grid-area: inputs;
+}
+#login-form-wrapper form {
+  max-width: 270px;
+  min-width: 190px;
+  margin: 0 auto;
+  justify-self: center;
+  align-self: center;
+  flex-grow: 1;
+}
+
+app-gaggle-input {
+  label {
+    padding: 3px;
+    font-size: 0.7rem;
+    color: rgba(0,0,0,0.70);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mat-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 2px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    line-height: 20px;
+    &:focus, &:focus-within {
+      border: none;
+      outline: none;
+    }
+    &.error {
+      border: 1px solid rgba(255,0,0,0.25);
+      background-color:  rgba(255,0,0,0.25);
+    }
+  }
+
+  button {
+    padding: 0.2em;
+    background-color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .mat-icon {
+      height: 0.7rem;
+      width: 0.7rem;
+    }
+  }
+}
+
+#submit-action-area {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit-btn {
+  margin: 0.5rem auto 0;
+  max-width: fit-content;
+}

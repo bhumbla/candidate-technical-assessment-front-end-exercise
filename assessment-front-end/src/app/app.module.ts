@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GaggleInputComponent } from './shared-ui/gaggle-input/gaggle-input.component';
 import { LoginComponent } from './login/login.component';
 import { ShowHideToggleButtonComponent } from './shared-ui/show-hide-toggle-button/show-hide-toggle-button.component';
+import { FormWrapperComponent } from './shared-ui/form-wrapper/form-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { ShowHideToggleButtonComponent } from './shared-ui/show-hide-toggle-butt
     GaggleInputComponent,
     LoginComponent,
     ShowHideToggleButtonComponent,
+    FormWrapperComponent,
+
   ],
   imports: [
     BrowserModule,

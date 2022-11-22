@@ -1,0 +1,36 @@
+<div id="login-form-wrapper">
+  <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit($event)" >
+    <div *ngFor="let form_elem of formTemplate">
+      <div [ngSwitch]="form_elem.type">
+        <app-gaggle-input *ngSwitchCase="'gaggle-input'">
+          <label for="{{form_elem.ctrlName}}">
+            <span>{{form_elem.label}}</span>
+            <app-show-hide-toggle-button *ngIf="form_elem.toggleBtn"
+            [onIcon]="'eye-closed'" [offIcon]="'eye-open'"
+            ariaLabel="{{form_elem.label}}" (change)="handleToggleBtn()"></app-show-hide-toggle-button>
+          </label>
+          <mat-icon *ngIf="form.get(form_elem.ctrlName)?.invalid && form.get(form_elem.ctrlName)?.touched"
+            [svgIcon]="form_elem.errorIcon ? form_elem.errorIcon : 'alert'">
+          </mat-icon>
+          <input [type]="toggleOn ? form_elem?.fieldTextType : 'text' " id="{{form_elem.ctrlName}}"
+            formControlName="{{form_elem.ctrlName}}"
+            [ngClass]="form.get(form_elem.ctrlName)?.invalid &&
+            (form.get(form_elem.ctrlName)?.dirty || form.get(form_elem.ctrlName)?.touched) ? 'error': ''">
+          <button type="button" *ngIf="form_elem.clearBtn &&
+            form.get(form_elem.ctrlName)?.value && form.get(form_elem.ctrlName)?.touched"
+            (click)="clearInput(form.get(form_elem.ctrlName))"
+            aria-label="'clear input'">
+            <mat-icon [svgIcon]="'close'"></mat-icon>
+          </button>
+          <mat-error *ngIf="form.get(form_elem.ctrlName)?.touched && form.get(form_elem.ctrlName)?.errors?.['required']">{{form_elem.label}} required</mat-error>
+          <mat-error *ngIf="form.get(form_elem.ctrlName)?.touched && form.get(form_elem.ctrlName)?.errors?.['minlength']">minimum length {{form_elem.minLength}} characters</mat-error>
+          <mat-error *ngIf="form.get(form_elem.ctrlName)?.touched && form.get(form_elem.ctrlName)?.errors?.['email']">invalid {{form_elem.label}} format</mat-error>
+        </app-gaggle-input>
+        <mat-checkbox *ngSwitchCase="'checkbox'" class="gaggle-checkbox" formControlName="{{form_elem.ctrlName}}">{{form_elem.label}}</mat-checkbox>
+      </div>
+    </div>
+    <div id="submit-action-area">
+      <button mat-raised-button color="primary" type="submit" id="submit-btn" >Sign On</button>
+    </div>
+  </form>
+</div>

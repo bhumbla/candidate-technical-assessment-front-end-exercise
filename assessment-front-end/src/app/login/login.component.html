@@ -1,36 +1,7 @@
 <main class="container">
   <section id="login-area">
     <app-gaggle-logo></app-gaggle-logo>
-    <div id="login-form-wrapper">
-      <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onSubmit(loginForm.value)" >
-        <app-gaggle-input>
-          <label for="username">
-            <span>Username</span>
-          </label>
-          <mat-icon *ngIf="username?.invalid && username?.touched" [svgIcon]="'alert'"></mat-icon>
-          <input type="text" id="username" formControlName="username" [ngClass]="username?.invalid && (username?.dirty || username?.touched) ? 'error': ''">
-          <button type="button" *ngIf="username?.value && username?.touched" (click)="clearInput(username)" aria-label="clear username"><mat-icon [svgIcon]="'close'"></mat-icon></button>
-          <mat-error *ngIf="username?.touched && username?.errors?.['required']">username required</mat-error>
-        </app-gaggle-input>
-        <app-gaggle-input>
-          <label for="password">
-            <span>Password</span>
-            <button id="hide-show-btn"  type="button" (click)="toggleShowPassword()" [attr.aria-label]="'Show password'" [attr.aria-pressed]="showPassword">
-              <mat-icon [svgIcon]="showPassword ? 'eye-closed' : 'eye-open'"></mat-icon>
-              <span>{{showPassword ? 'Hide' : 'Show'}}</span>
-            </button>
-          </label>
-          <mat-icon *ngIf="password?.invalid && password?.touched" [svgIcon]="'alert'"></mat-icon>
-          <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" [ngClass]="password?.touched && password?.invalid ? 'error': ''">
-          <button *ngIf="password?.value && password?.touched" type="button" (click)="clearInput(password)" aria-label="clear password"><mat-icon [svgIcon]="'close'"></mat-icon></button>
-          <mat-error *ngIf="password?.touched && password?.errors?.['required']">password required</mat-error>
-        </app-gaggle-input>
-        <div id="submit-action-area">
-          <mat-checkbox class="gaggle-checkbox" formControlName="remember">Remember Me</mat-checkbox>
-          <button mat-raised-button color="primary" type="submit" id="submit-btn" >Sign On</button>
-        </div>
-      </form>
-    </div>
+    <app-form-wrapper (submit)="onSubmit($event)" [formTemplate]="loginFormTemplate"></app-form-wrapper>
     <footer id="account-links">
       <button mat-button color="primary" type="button" (click)="showDialog(registrationDialog)">Register</button>
       <button mat-button color="primary" type="button" (click)="showDialog(forgotPasswordDialog)">Forgot Password?</button>
@@ -42,9 +13,36 @@
 </main>
 
 <ng-template #registrationDialog>
-  <p>Register Account</p>
+  <mat-dialog-content id="content">
+    <app-gaggle-logo [fullsize]="false"></app-gaggle-logo>
+    <main>
+      <h4>New Account</h4>
+      <app-form-wrapper (submit)="onSubmit($event)" [formTemplate]="registerFormTemplate" #register></app-form-wrapper>
+    </main>
+  </mat-dialog-content>
+  <mat-dialog-actions id="dialog-actions">
+    <button mat-button mat-dialog-close="canceled">Cancel</button>
+    <button mat-button color="primary" (click)="registerUser()">Register Account</button>
+  </mat-dialog-actions>
 </ng-template>
 
 <ng-template #forgotPasswordDialog>
-  <p>Forgot Password</p>
+  <mat-dialog-content id="content">
+    <ng-container *ngIf="!forgotPasswordRequestSent; else requested">
+      <h4>Forgot Password</h4>
+      <app-form-wrapper (submit)="onSubmit($event)" [formTemplate]="forgotPasswordTemplate" #forgot></app-form-wrapper>
+    </ng-container>
+    <ng-template #requested>
+      <p>
+        A password change request has been sent to the email provided. Please follow the included instructions.
+      </p>
+    </ng-template>
+  </mat-dialog-content>
+  <mat-dialog-actions id="dialog-actions">
+    <button mat-button mat-dialog-close="exited">
+      {{forgotPasswordRequestSent ? 'Exit' : 'Cancel'}}
+    </button>
+    <button *ngIf="!forgotPasswordRequestSent" mat-button color="primary"
+      (click)="forgotPasswordRequest()">Submit</button>
+  </mat-dialog-actions>
 </ng-template>

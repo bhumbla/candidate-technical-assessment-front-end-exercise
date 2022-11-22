@@ -1,15 +1,17 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormGroup, Validators, AbstractControl, FormBuilder } from '@angular/forms';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../services/login.service';
+import { FormWrapperComponent } from '../shared-ui/form-wrapper/form-wrapper.component';
+import { FormTemplate } from '../types/form-template';
 import User from '../types/user';
 
 const DIALOG_OPTIONS = {
-  disableClose: true
+  disableClose: false
 };
 @Component({
   selector: 'app-login',
@@ -17,32 +19,88 @@ const DIALOG_OPTIONS = {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  loginFormTemplate: FormTemplate[] = [
+    {
+      "type": "gaggle-input",
+      "errorIcon": 'alert',
+      "label": 'Username',
+      "ctrlName": 'username',
+      "clearBtn": true,
+      "required": true
+    },
+    {
+      "type": "gaggle-input",
+      "errorIcon": 'alert',
+      "label" :'Password',
+      "toggleBtn": true,
+      "fieldTextType": 'password',
+      "ctrlName": 'password',
+      "clearBtn": true,
+      "required": true,
+    },
+    {
+      "type": "checkbox",
+      "ctrlName": 'remember',
+      "label": 'Remember',
+      "defaultValue": false
+    }
+  ];
 
-  loginForm: FormGroup = this._fb.group({
-    username: this._fb.nonNullable.control('', {
-      validators: [Validators.required]
-    }),
-    password: this._fb.nonNullable.control('', {
-      validators: [Validators.required]
-    }),
-    remember: this._fb.nonNullable.control(false),
-  });
+  registerFormTemplate: FormTemplate[] = [
+    {
+      "type": "gaggle-input",
+      "errorIcon": 'alert',
+      "label": 'Username',
+      "ctrlName": 'username',
+      "clearBtn": true,
+      "required": true
+    },
+    {
+      "type": "gaggle-input",
+      "errorIcon": 'alert',
+      "label" :'Password',
+      "toggleBtn": true,
+      "fieldTextType": 'password',
+      "ctrlName": 'password',
+      "clearBtn": true,
+      "required": true,
+      "minLength": 8
+    },
+    {
+      "type": "gaggle-input",
+      "errorIcon": 'alert',
+      "label": 'Email',
+      "ctrlName": 'email',
+      "fieldTextType": 'email',
+      "clearBtn": true,
+      "required": true,
+      "email": true
+    },
+  ];
 
-  get username(): AbstractControl | null  {
-    return this.loginForm.get('username');
-  }
+  forgotPasswordTemplate: FormTemplate[] = [
+    {
+      "type": "gaggle-input",
+      "errorIcon": 'alert',
+      "label": 'Email',
+      "ctrlName": 'email',
+      "fieldTextType": 'email',
+      "clearBtn": true,
+      "required": true,
+      "email": true
+    }
+  ];
 
-  get password(): AbstractControl | null {
-    return this.loginForm.get('password');
-  }
 
-  get email(): AbstractControl | null {
-    return this.loginForm.get('email');
-  }
+  @ViewChild('register') register!: FormWrapperComponent;
+  @ViewChild('forgot') forgot!: FormWrapperComponent;
 
-  showPassword:boolean = false;
+  forgotPasswordRequestSent: boolean = false;
+
   errorMessage: string = '';
   submission$!: Subscription;
+
+  private dialogRef!: MatDialogRef<any>;
 
   constructor(private _router: Router, private _dialog: MatDialog, private _fb: FormBuilder,
     private _loginService: LoginService, private _snackBar: MatSnackBar) { }
@@ -51,8 +109,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  toggleShowPassword = () => {
-    this.showPassword = !this.showPassword;
+  ngAfterViewInit() {
   }
 
   clearInput = ($inputCtrl: AbstractControl | null) => {
@@ -60,13 +117,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit = (formData: User) => {
-    console.log(formData);
-    let user: {username: string, password: string} = {
-      username: this.username?.value,
-      password: this.password?.value
-    }
-    let { username, password} = user;
-    this.submission$ = this._loginService.loginUser(username, password).subscribe((response: {status: number, message: string}) => {
+    let { username, password, email} = formData;
+    this.submission$ = this._loginService.loginUser(username, password, email).subscribe((response: {status: number, message: string}) => {
       let status = response.status;
       switch (status) {
         case 200:
@@ -93,8 +145,21 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  showDialog = (templateRef?: TemplateRef<any>) => {
-      templateRef && this._dialog.open(templateRef, DIALOG_OPTIONS);
+  showDialog = (templateRef: TemplateRef<FormWrapperComponent>) => {
+     this.dialogRef = this._dialog.open(templateRef, DIALOG_OPTIONS);
+  }
+
+  registerUser() {
+    if(this.register.form.valid) {
+      this.dialogRef.close();
+      this.onSubmit(this.register.form.value);
+    }
+  }
+
+  forgotPasswordRequest() {
+    if(this.forgot.form.valid) {
+      this.forgotPasswordRequestSent = true;
+    }
   }
 
   ngOnDestroy() {
