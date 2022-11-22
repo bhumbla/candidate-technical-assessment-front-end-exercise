@@ -17,7 +17,7 @@
     <app-gaggle-logo [fullsize]="false"></app-gaggle-logo>
     <main>
       <h4>New Account</h4>
-      <app-form-wrapper (submit)="onSubmit($event)" [formTemplate]="registerFormTemplate" #register></app-form-wrapper>
+      <app-form-wrapper [formTemplate]="registerFormTemplate" #register></app-form-wrapper>
     </main>
   </mat-dialog-content>
   <mat-dialog-actions id="dialog-actions">
@@ -30,7 +30,7 @@
   <mat-dialog-content id="forgot-password-content">
     <ng-container *ngIf="!forgotPasswordRequestSent; else requested">
       <h4>Forgot Password</h4>
-      <app-form-wrapper (submit)="onSubmit($event)" [formTemplate]="forgotPasswordTemplate" #forgot></app-form-wrapper>
+      <app-form-wrapper [formTemplate]="forgotPasswordTemplate" #forgot></app-form-wrapper>
     </ng-container>
     <ng-template #requested>
       <p>
