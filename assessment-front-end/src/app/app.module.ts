@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GaggleButtonComponent } from './shared-ui/gaggle-button/gaggle-button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GaggleInputComponent } from './shared-ui/gaggle-input/gaggle-input.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { GaggleInputComponent } from './shared-ui/gaggle-input/gaggle-input.comp
     DashboardComponent,
     GaggleLogoComponent,
     GaggleButtonComponent,
-    GaggleInputComponent
+    GaggleInputComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
