@@ -11,7 +11,7 @@ import { FormTemplate } from '../types/form-template';
 import User from '../types/user';
 
 const DIALOG_OPTIONS = {
-  disableClose: false
+  disableClose: true
 };
 @Component({
   selector: 'app-login',
