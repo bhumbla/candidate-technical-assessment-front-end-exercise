@@ -9,6 +9,8 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { IncidentService } from '../services/incident.service';
 
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +38,9 @@ export class DashboardComponent implements OnInit {
     return this.filterForm.get('keyword');
   }
 
-  constructor(private _fb: FormBuilder, private dataService: IncidentService, private breakpoint$: BreakpointObserver) { }
+  constructor(private _fb: FormBuilder, private dataService: IncidentService,
+    private _router: Router, private loginService: LoginService,
+    private breakpoint$: BreakpointObserver) { }
 
   ngOnInit(): void {
   // Changes what columns are visible for mobile screens.
@@ -58,7 +62,8 @@ export class DashboardComponent implements OnInit {
   }
 
   logout = () => {
-    console.log('Placeholder to logout user');
+    this.loginService.logoutUser();
+    this._router.navigate(['/login']);
   }
 
   toggleDarkMode() {
