@@ -19,34 +19,38 @@ const DIALOG_OPTIONS = {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginFormTemplate: FormTemplate[] = [
-    {
-      "type": "gaggle-input",
-      "errorIcon": 'alert',
-      "label": 'Username',
-      "ctrlName": 'username',
-      "clearBtn": true,
-      "required": true
-    },
-    {
-      "type": "gaggle-input",
-      "errorIcon": 'alert',
-      "label" :'Password',
-      "toggleBtn": true,
-      "fieldTextType": 'password',
-      "ctrlName": 'password',
-      "clearBtn": true,
-      "required": true,
-    },
-    {
-      "type": "checkbox",
-      "ctrlName": 'remember',
-      "label": 'Remember',
-      "defaultValue": false
-    }
-  ];
+loginFormTemplate: FormTemplate = {
+  showSubmitBtn: true,
+  fields: [
+  {
+    "type": "gaggle-input",
+    "errorIcon": 'alert',
+    "label": 'Username',
+    "ctrlName": 'username',
+    "clearBtn": true,
+    "required": true
+  },
+  {
+    "type": "gaggle-input",
+    "errorIcon": 'alert',
+    "label" :'Password',
+    "toggleBtn": true,
+    "fieldTextType": 'password',
+    "ctrlName": 'password',
+    "clearBtn": true,
+    "required": true,
+  },
+  {
+    "type": "checkbox",
+    "ctrlName": 'remember',
+    "label": 'Remember',
+    "defaultValue": false
+  }
+]};
 
-  registerFormTemplate: FormTemplate[] = [
+  registerFormTemplate: FormTemplate = {
+    showSubmitBtn: false,
+    fields: [
     {
       "type": "gaggle-input",
       "errorIcon": 'alert',
@@ -76,9 +80,12 @@ export class LoginComponent implements OnInit {
       "required": true,
       "email": true
     },
-  ];
+  ]
+};
 
-  forgotPasswordTemplate: FormTemplate[] = [
+  forgotPasswordTemplate: FormTemplate = {
+    showSubmitBtn: false,
+    fields: [
     {
       "type": "gaggle-input",
       "errorIcon": 'alert',
@@ -89,7 +96,7 @@ export class LoginComponent implements OnInit {
       "required": true,
       "email": true
     }
-  ];
+  ]};
 
 
   @ViewChild('register') register!: FormWrapperComponent;

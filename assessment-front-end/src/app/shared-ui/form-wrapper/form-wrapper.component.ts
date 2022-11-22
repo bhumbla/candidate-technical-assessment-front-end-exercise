@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FieldTemplate } from 'src/app/types/field-template';
 import { FormTemplate } from 'src/app/types/form-template';
 import User from 'src/app/types/user';
 
@@ -9,8 +10,11 @@ import User from 'src/app/types/user';
   styleUrls: ['./form-wrapper.component.scss']
 })
 export class FormWrapperComponent implements OnInit {
-  @Input() formTemplate!: FormTemplate[];
+  @Input()
+  @Input() formTemplate!: FormTemplate;
   @Output() submit: EventEmitter<User> = new EventEmitter();
+
+  fields!: FieldTemplate[];
 
   form!: FormGroup;
 
@@ -20,8 +24,8 @@ export class FormWrapperComponent implements OnInit {
   ngOnInit(): void {
     let formObj: any = {};
     console.log(this.formTemplate);
-
-    this.formTemplate.forEach(field => {
+    this.fields = this.formTemplate.fields;
+    this.fields.forEach(field => {
       let validators: ValidatorFn[] = [];
       console.log(field);
       if(field.required) validators.push(Validators.required);
