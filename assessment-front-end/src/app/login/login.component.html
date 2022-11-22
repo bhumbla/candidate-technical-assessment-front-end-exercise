@@ -1,1 +1,50 @@
-<p>login works!</p>
+<main class="container">
+  <section id="login-area">
+    <app-gaggle-logo></app-gaggle-logo>
+    <div id="login-form-wrapper">
+      <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onSubmit(loginForm.value)" >
+        <app-gaggle-input>
+          <label for="username">
+            <span>Username</span>
+          </label>
+          <mat-icon *ngIf="username?.invalid && username?.touched" [svgIcon]="'alert'"></mat-icon>
+          <input type="text" id="username" formControlName="username" [ngClass]="username?.invalid && (username?.dirty || username?.touched) ? 'error': ''">
+          <button type="button" *ngIf="username?.value && username?.touched" (click)="clearInput(username)" aria-label="clear username"><mat-icon [svgIcon]="'close'"></mat-icon></button>
+          <mat-error *ngIf="username?.touched && username?.errors?.['required']">username required</mat-error>
+        </app-gaggle-input>
+        <app-gaggle-input>
+          <label for="password">
+            <span>Password</span>
+            <button id="hide-show-btn"  type="button" (click)="toggleShowPassword()" [attr.aria-label]="'Show password'" [attr.aria-pressed]="showPassword">
+              <mat-icon [svgIcon]="showPassword ? 'eye-closed' : 'eye-open'"></mat-icon>
+              <span>{{showPassword ? 'Hide' : 'Show'}}</span>
+            </button>
+          </label>
+          <mat-icon *ngIf="password?.invalid && password?.touched" [svgIcon]="'alert'"></mat-icon>
+          <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" [ngClass]="password?.touched && password?.invalid ? 'error': ''">
+          <button *ngIf="password?.value && password?.touched" type="button" (click)="clearInput(password)" aria-label="clear password"><mat-icon [svgIcon]="'close'"></mat-icon></button>
+          <mat-error *ngIf="password?.touched && password?.errors?.['required']">password required</mat-error>
+        </app-gaggle-input>
+        <div id="submit-action-area">
+          <mat-checkbox class="gaggle-checkbox" formControlName="remember">Remember Me</mat-checkbox>
+          <button mat-raised-button color="primary" type="submit" id="submit-btn" >Sign On</button>
+        </div>
+      </form>
+    </div>
+    <footer id="account-links">
+      <button mat-button color="primary" type="button" (click)="showDialog(registrationDialog)">Register</button>
+      <button mat-button color="primary" type="button" (click)="showDialog(forgotPasswordDialog)">Forgot Password?</button>
+    </footer>
+  </section>
+  <section id="hero-img">
+    <img src="../../assets/hero-image.png" alt="overhead picture of cafateria">
+  </section>
+</main>
+
+<ng-template #registrationDialog>
+  <p>Register Account</p>
+</ng-template>
+
+<ng-template #forgotPasswordDialog>
+  <p>Forgot Password</p>
+</ng-template>

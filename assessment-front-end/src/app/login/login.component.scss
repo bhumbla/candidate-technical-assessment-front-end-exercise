@@ -1,0 +1,142 @@
+.container {
+  display: grid;
+  grid: 'login';
+  grid-auto-columns: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#login-area {
+  grid-area: login;
+  display: grid;
+  grid-template:
+    'logo' 100px
+    'inputs' 1fr
+    'footer' 90px
+}
+#logo {
+  grid-area: logo;
+}
+
+#login-form-wrapper {
+  flex-grow: 1;
+  display: flex;
+  grid-area: inputs;
+}
+#login-form-wrapper form {
+  max-width: 270px;
+  min-width: 190px;
+  margin: 0 auto;
+  justify-self: center;
+  align-self: center;
+  flex-grow: 1;
+}
+
+app-gaggle-input {
+  label {
+    padding: 3px;
+    font-size: 0.7rem;
+    color: rgba(0,0,0,0.70);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mat-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 2px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    line-height: 20px;
+    &:focus, &:focus-within {
+      border: none;
+      outline: none;
+    }
+    &.error {
+      border: 1px solid rgba(255,0,0,0.25);
+      background-color:  rgba(255,0,0,0.25);
+    }
+  }
+
+  button {
+    padding: 0.2em;
+    background-color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .mat-icon {
+      height: 0.7rem;
+      width: 0.7rem;
+    }
+  }
+}
+
+#hide-show-btn {
+  display: inline-flex;
+  justify-content: center;
+  border: none;
+  align-items: center;
+  background: white;
+  font-size: 0.7rem;
+  height: 0.7rem;
+}
+#hide-show-btn:hover {
+  cursor: pointer;
+}
+
+#hide-show-btn .mat-icon {
+  height: 0.7rem;
+  width: 0.7rem;
+}
+
+#hide-show-btn span {
+  margin-left: 0.2rem;
+}
+
+#submit-action-area {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit-btn {
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+#account-links {
+  grid-area: footer;
+  margin: 0 auto;
+}
+/**
+* screen sizes smaller than 820px
+* should not display hero image.
+**/
+#hero-img {
+  display: none;
+}
+
+/* breakpoint for non-moble devices
+*/
+@media(min-width: 820px) {
+  .container {
+    grid: 'login hero';
+    grid-auto-columns: 50vw 50vw;
+  }
+  #hero-img {
+    display: block;
+    grid-area: hero;
+
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
