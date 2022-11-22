@@ -13,7 +13,7 @@
 </main>
 
 <ng-template #registrationDialog>
-  <mat-dialog-content id="content">
+  <mat-dialog-content id="registration-content">
     <app-gaggle-logo [fullsize]="false"></app-gaggle-logo>
     <main>
       <h4>New Account</h4>
@@ -27,7 +27,7 @@
 </ng-template>
 
 <ng-template #forgotPasswordDialog>
-  <mat-dialog-content id="content">
+  <mat-dialog-content id="forgot-password-content">
     <ng-container *ngIf="!forgotPasswordRequestSent; else requested">
       <h4>Forgot Password</h4>
       <app-form-wrapper (submit)="onSubmit($event)" [formTemplate]="forgotPasswordTemplate" #forgot></app-form-wrapper>
