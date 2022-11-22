@@ -1,0 +1,17 @@
+<div class="form-field-wrapper">
+  <div class="form-field">
+    <ng-content select="label"></ng-content>
+    <!-- <label for="username">
+      <span>Username</span>
+    </label> -->
+    <div class="input-group">
+      <ng-content select="mat-icon"></ng-content>
+      <ng-content select="input"></ng-content>
+      <ng-content select="button"></ng-content>
+      <!-- <mat-icon *ngIf="username?.invalid && username?.touched" [svgIcon]="'alert'"></mat-icon>
+      <input type="text" id="username" formControlName="username" [ngClass]="username?.invalid && (username?.dirty || username?.touched) ? 'error': ''">
+      <button type="button" *ngIf="username?.value && username?.touched" (click)="clearInput(username)" aria-label="clear username"><mat-icon [svgIcon]="'close'"></mat-icon></button> -->
+    </div>
+    <ng-content select="mat-error"></ng-content>
+    <!-- <mat-error *ngIf="username?.touched && username?.errors?.['required']">username required</mat-error> -->
+  </div>
