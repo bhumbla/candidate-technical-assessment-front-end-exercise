@@ -52,6 +52,8 @@ export class FormWrapperComponent implements OnInit {
     $event.stopPropagation();
     if(this.form.valid) {
       this.submit.emit(this.form.value);
+    } else {
+      this.form.markAllAsTouched();
     }
   }
 

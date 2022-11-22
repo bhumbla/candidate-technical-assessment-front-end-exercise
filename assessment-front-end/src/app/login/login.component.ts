@@ -160,6 +160,8 @@ loginFormTemplate: FormTemplate = {
     if(this.register.form.valid) {
       this.dialogRef.close();
       this.onSubmit(this.register.form.value);
+    } else{
+      this.register.form.markAllAsTouched();
     }
   }
 
