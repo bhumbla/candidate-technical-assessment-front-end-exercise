@@ -3,6 +3,7 @@
 
   mat-divider {
     border-top-style: groove;
+    border-top-width: 2px;
   }
 
   header {
@@ -86,10 +87,17 @@
 
   table {
     background-color:#EBEBEB;
+    width: 100vw;
     &.full-screen {
       position: absolute;
       top: 0;
     }
+
+    th.mat-column-date, th.mat-column-type, th.mat-column-status {
+      font-size: medium;
+      font-weight: 600;
+    }
+
   }
 
 }
