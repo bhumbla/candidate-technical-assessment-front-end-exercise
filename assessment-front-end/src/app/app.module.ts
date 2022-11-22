@@ -8,19 +8,25 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { GaggleLogoComponent } from './shared-ui/gaggle-logo/gaggle-logo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GaggleButtonComponent } from './shared-ui/gaggle-button/gaggle-button.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GaggleInputComponent } from './shared-ui/gaggle-input/gaggle-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    GaggleLogoComponent
+    GaggleLogoComponent,
+    GaggleButtonComponent,
+    GaggleInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
