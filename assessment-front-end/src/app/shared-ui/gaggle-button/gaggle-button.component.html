@@ -1,0 +1,7 @@
+<div [ngClass]="contentPosition">
+  <button type="button" (click)="onClick($event)" >
+    <mat-icon *ngIf="icon" [svgIcon]="icon"></mat-icon>
+    {{labelText}}
+  </button>
+  <ng-content></ng-content>
+</div>

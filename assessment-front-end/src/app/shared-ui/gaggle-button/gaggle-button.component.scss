@@ -1,0 +1,11 @@
+button:hover {
+  cursor: pointer;
+}
+.top {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+}
