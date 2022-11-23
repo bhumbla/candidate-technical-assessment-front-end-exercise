@@ -23,15 +23,12 @@ export class FormWrapperComponent implements OnInit {
 
   ngOnInit(): void {
     let formObj: any = {};
-    console.log(this.formTemplate);
     this.fields = this.formTemplate.fields;
     this.fields.forEach(field => {
       let validators: ValidatorFn[] = [];
-      console.log(field);
       if(field.required) validators.push(Validators.required);
       if(field.minLength) validators.push(Validators.minLength(field.minLength));
       if(field.email) validators.push(Validators.email);
-      console.log(validators);
       formObj[field.ctrlName] = this._fb.nonNullable.control(field.defaultValue, {
         validators
       });
