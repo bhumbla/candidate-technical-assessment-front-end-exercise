@@ -20,6 +20,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { Component, Input } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'mat-icon',
@@ -39,7 +41,7 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardComponent, GaggleLogoComponent, GaggleButtonComponent ],
-      imports: [MatIconModule, MatMenuModule,
+      imports: [MatCheckboxModule,MatTableModule, MatIconModule, MatMenuModule,
         MatButtonModule,
         MatInputModule,
         MatTooltipModule,
