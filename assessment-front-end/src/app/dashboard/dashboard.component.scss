@@ -1,5 +1,18 @@
 .container {
   background-color:#EBEBEB;
+  &.dark-mode {
+    background-color: black;
+    #hamburger-menu {
+      color: white;
+    }
+    table {
+      background-color: black;
+    }
+  }
+
+  app-gaggle-logo {
+    height: 65px;
+  }
 
   mat-divider {
     border-top-style: groove;
@@ -88,6 +101,7 @@
   table {
     background-color:#EBEBEB;
     width: 100vw;
+
     &.full-screen {
       position: absolute;
       top: 0;
@@ -97,11 +111,9 @@
       font-size: medium;
       font-weight: 600;
     }
-
   }
 
 }
-
 
 app-gaggle-button {
   margin-left: 1rem;
@@ -130,6 +142,3 @@ app-gaggle-button {
   right: 0;
 }
 
-app-gaggle-logo {
-  height: 65px;
-}

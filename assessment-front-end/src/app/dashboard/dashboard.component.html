@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container" [ngClass]="darkmode ? 'dark-mode' : ''">
   <header>
     <button mat-button [matMenuTriggerFor]="menu" aria-label="menu" id="hamburger-menu">
       <mat-icon [svgIcon]="'menu-grid'"></mat-icon>
@@ -26,13 +26,13 @@
       <div id="filter-area">
         <app-gaggle-input [formGroup]="filterForm">
           <mat-icon [svgIcon]="'filter-alt'"></mat-icon>
-          <input type="text" id="table-filter" formControlName="keyword">
+          <input type="text" id="table-filter" formControlName="keyword" placeholder="Find...">
           <button type="button" *ngIf="keyword?.value && keyword?.touched"
                 (click)="clearInput(keyword)" aria-label="clear username">
             <mat-icon [svgIcon]="'close'"></mat-icon>
           </button>
         </app-gaggle-input>
-        <label for="table-filter">Filter by Keyword</label>
+        <mat-hint>Filter by keyword</mat-hint>
       </div>
       <app-gaggle-button id="export" icon="export" aria-label="Button to export data" matTooltip="Export">
       </app-gaggle-button>
