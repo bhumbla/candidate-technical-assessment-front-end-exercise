@@ -8,21 +8,14 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   const mockIconService = {
-    registerIcons: jest.fn()
+    registerIcons: jest.fn(),
   };
-
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-      providers: [
-        {provide: IconService, useValue: mockIconService}
-      ]
+      imports: [RouterTestingModule],
+      declarations: [AppComponent],
+      providers: [{ provide: IconService, useValue: mockIconService }],
     }).compileComponents();
   });
 
@@ -36,17 +29,4 @@ describe('AppComponent', () => {
     component.ngOnInit();
     expect(component.iconService.registerIcons).toHaveBeenCalled();
   });
-
-  // it(`should have as title 'assessment-front-end'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.componentInstance;
-  //   expect(app.title).toEqual('assessment-front-end');
-  // });
-
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain('assessment-front-end app is running!');
-  // });
 });
