@@ -24,18 +24,6 @@
   margin: 0 auto;
 }
 
-/** Styling for Dialogs **/
-#registration-content {
-  display: flex;
-}
-
-#forgot-password-content {
-  max-width: 20vw;
-}
-
-#dialog-actions {
-  justify-content: space-between;
-}
 
 /**
 * screen sizes smaller than 820px
@@ -61,5 +49,18 @@
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  /** Styling for Dialogs **/
+  #registration-content {
+    display: flex;
+  }
+
+
+  #dialog-actions {
+    justify-content: space-between;
+  }
+  #forgot-password-content {
+    max-width: 20vw;
   }
 }
